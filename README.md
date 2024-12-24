@@ -13,19 +13,16 @@ Primary purpose of this repository is *stand on customer* to provide a *PoV(proo
 |Name |Example of PoV |
 |Scenarios Summary |
 * value 1
-* value 2
-|
+* value 2|
 
 |Value Highlights |
 * value 1
-* value 2
-|
+* value 2|
 
 |PoV |
 ```
 # 这是一个Python代码块
 def hello():
     print("Hello")
-```
-|
+```|
 
