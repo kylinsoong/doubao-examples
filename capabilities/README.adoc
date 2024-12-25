@@ -1,0 +1,219 @@
+= Doubao LLM
+:toc: manual
+
+== Speech
+
+=== 录音文件识别
+
+[source,bash]
+.*1. set header variables*
+----
+DOUBAO_API_APP_KEY=
+DOUBAO_API_ACCESS_KEY=
+DOUBAO_API_RESOURCE_ID=
+DOUBAO_API_REQUEST_ID=
+DOUBAO_API_SEQUENCE=
+
+// verify settings
+echo $DOUBAO_API_SEQUENCE
+echo $DOUBAO_API_REQUEST_ID
+echo $DOUBAO_API_RESOURCE_ID
+echo $DOUBAO_API_ACCESS_KEY
+echo $DOUBAO_API_APP_KEY
+----
+
+NOTE: Refer to https://www.volcengine.com/docs/6561/1354868#%E8%AF%B7%E6%B1%82 for setting above http header variables.
+
+[source,json]
+.*2. set pod payload*
+----
+{
+    "user": {
+        "uid": "66666688888888"
+    },
+    "audio": {
+        "format": "wav",
+        "url": "https://asr-wav-kylin.tos-cn-beijing.volces.com/IC0936W0016.wav"
+    },
+    "request": {
+        "model_name": "bigmodel",
+        "enable_itn": true
+    }
+}
+----
+
+[source,bash]
+.*3. submmit task*
+----
+curl -X POST "https://openspeech.bytedance.com/api/v3/auc/bigmodel/submit" \
+-H "Content-Type: application/json" \
+-H "X-Api-App-Key: $DOUBAO_API_APP_KEY" \
+-H "X-Api-Access-Key: $DOUBAO_API_ACCESS_KEY" \
+-H "X-Api-Resource-Id: $DOUBAO_API_RESOURCE_ID" \
+-H "X-Api-Request-Id: $DOUBAO_API_REQUEST_ID" \
+-H "X-Api-Sequence: $DOUBAO_API_SEQUENCE" \
+-d @"payload.json" -v
+----
+
+check the http response header for verifying submmitted task is success, more details refer to https://www.volcengine.com/docs/6561/1354868#%E5%BA%94%E7%AD%94 
+
+[source,bash]
+----
+< HTTP/2 200 
+< server: Tengine
+< content-type: application/json; charset=utf-8
+< content-length: 2
+< date: Wed, 25 Dec 2024 03:50:49 GMT
+< x-tt-logid: 202412251150488E1DD274964AAC0E3222
+< api-service-host: fdbd:dc03:e:303::24
+< x-api-request-id: 6BC90872-4336-4339-85B6-CF3370618991
+< x-api-status-code: 20000000
+< x-api-message: OK
+< server-timing: inner; dur=230
+----
+
+[source,bash]
+.*4. query results*
+----
+curl -X POST "https://openspeech.bytedance.com/api/v3/auc/bigmodel/query" \
+-H "Content-Type: application/json" \
+-H "X-Api-App-Key: $DOUBAO_API_APP_KEY" \
+-H "X-Api-Access-Key: $DOUBAO_API_ACCESS_KEY" \
+-H "X-Api-Resource-Id: $DOUBAO_API_RESOURCE_ID" \
+-H "X-Api-Request-Id: $DOUBAO_API_REQUEST_ID" \
+-d '{}' -v 
+----
+
+Use the same methods as submmit task to check the query post is success, the successed response as below:
+
+[source,json]
+----
+{
+  "audio_info": {
+    "duration": 5216
+  },
+  "result": {
+    "additions": {
+      "duration": "5216"
+    },
+    "text": "中共闽宁镇纪律检查委员会。",
+    "utterances": [
+      {
+        "end_time": 4660,
+        "start_time": 340,
+        "text": "中共闽宁镇纪律检查委员会。",
+        "words": [
+          {
+            "confidence": 0,
+            "end_time": 580,
+            "start_time": 340,
+            "text": "中"
+          },
+          {
+            "confidence": 0,
+            "end_time": 780,
+            "start_time": 580,
+            "text": "共"
+          },
+          {
+            "confidence": 0,
+            "end_time": 1060,
+            "start_time": 1020,
+            "text": "闽"
+          },
+          {
+            "confidence": 0,
+            "end_time": 1420,
+            "start_time": 1220,
+            "text": "宁"
+          },
+          {
+            "confidence": 0,
+            "end_time": 1780,
+            "start_time": 1460,
+            "text": "镇"
+          },
+          {
+            "confidence": 0,
+            "end_time": 2860,
+            "start_time": 2700,
+            "text": "纪"
+          },
+          {
+            "confidence": 0,
+            "end_time": 3060,
+            "start_time": 2860,
+            "text": "律"
+          },
+          {
+            "confidence": 0,
+            "end_time": 3620,
+            "start_time": 3340,
+            "text": "检"
+          },
+          {
+            "confidence": 0,
+            "end_time": 3820,
+            "start_time": 3620,
+            "text": "查"
+          },
+          {
+            "confidence": 0,
+            "end_time": 4260,
+            "start_time": 3980,
+            "text": "委"
+          },
+          {
+            "confidence": 0,
+            "end_time": 4380,
+            "start_time": 4260,
+            "text": "员"
+          },
+          {
+            "confidence": 0,
+            "end_time": 4660,
+            "start_time": 4380,
+            "text": "会"
+          }
+        ]
+      }
+    ]
+  }
+}
+----
+
+[source,bash]
+.**
+----
+
+----
+
+[source,bash]
+.**
+----
+
+----
+
+[source,bash]
+.**
+----
+
+----
+
+[source,bash]
+.**
+----
+
+----
+
+[source,bash]
+.**
+----
+
+----
+
+[source,bash]
+.**
+----
+
+----
