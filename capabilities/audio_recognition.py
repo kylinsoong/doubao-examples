@@ -10,6 +10,7 @@ QUERY_URL = "https://openspeech.bytedance.com/api/v3/auc/bigmodel/query"
 # Read API keys from system environment variables
 API_APP_KEY = os.getenv("DOUBAO_API_APP_KEY")
 API_ACCESS_KEY = os.getenv("DOUBAO_API_ACCESS_KEY")
+API_REQUEST_ID = os.getenv("DOUBAO_API_REQUEST_ID")
 API_RESOURCE_ID = os.getenv("DOUBAO_API_RESOURCE_ID")
 API_SEQUENCE = os.getenv("DOUBAO_API_SEQUENCE", "-1")  # Default to "-1"
 
@@ -19,6 +20,9 @@ if not all([API_APP_KEY, API_ACCESS_KEY, API_RESOURCE_ID]):
 
 # Submit API function
 def submit_task(payload_file):
+
+    print("submit task...")
+
     # Load payload from file
     with open(payload_file, 'r') as file:
         payload = json.load(file)
@@ -29,22 +33,18 @@ def submit_task(payload_file):
         "X-Api-App-Key": API_APP_KEY,
         "X-Api-Access-Key": API_ACCESS_KEY,
         "X-Api-Resource-Id": API_RESOURCE_ID,
-        "X-Api-Request-Id": "",  # Can be dynamically generated if needed
+        "X-Api-Request-Id": API_REQUEST_ID,
         "X-Api-Sequence": API_SEQUENCE,
     }
 
     # Send POST request to the Submit API
     response = requests.post(SUBMIT_URL, headers=headers, json=payload)
 
+    print("response status_code", response.status_code)
+
     if response.status_code == 200:
-        data = response.json()
-        if data.get("code") == 0:
-            print("Task submitted successfully!")
-            print(f"Request ID: {data['data']['Request-Id']}")
-            return data["data"]["Request-Id"]
-        else:
-            print(f"Submit API Error: {data.get('message')}")
-            return None
+        time.sleep(3)
+        return API_REQUEST_ID
     else:
         print(f"HTTP Error: {response.status_code}")
         print(response.text)
@@ -53,12 +53,15 @@ def submit_task(payload_file):
 # Query API function
 def query_task(request_id):
     # Headers for the Query API
+
+    print("query task...")
+
     headers = {
         "Content-Type": "application/json",
         "X-Api-App-Key": API_APP_KEY,
         "X-Api-Access-Key": API_ACCESS_KEY,
         "X-Api-Resource-Id": API_RESOURCE_ID,
-        "X-Api-Request-Id": request_id,
+        "X-Api-Request-Id": API_REQUEST_ID,
     }
 
     # Send POST request to the Query API
@@ -66,25 +69,12 @@ def query_task(request_id):
         response = requests.post(QUERY_URL, headers=headers, json={})
         if response.status_code == 200:
             data = response.json()
-            if data.get("code") == 0:
-                status = data["data"]["status"]
-                print(f"Task Status: {status}")
-                if status == "completed":
-                    print("Task Result:", data["data"]["result"])
-                    break
-                elif status == "failed":
-                    print("Task failed.")
-                    break
-            else:
-                print(f"Query API Error: {data.get('message')}")
-                break
+            print(type(data))
         else:
             print(f"HTTP Error: {response.status_code}")
             print(response.text)
             break
 
-        # Wait before retrying
-        time.sleep(5)
 
 # Main function
 if __name__ == "__main__":

@@ -8,11 +8,11 @@
 [source,bash]
 .*1. set header variables*
 ----
-DOUBAO_API_APP_KEY=
-DOUBAO_API_ACCESS_KEY=
-DOUBAO_API_RESOURCE_ID=
-DOUBAO_API_REQUEST_ID=
-DOUBAO_API_SEQUENCE=
+export DOUBAO_API_APP_KEY=
+export DOUBAO_API_ACCESS_KEY=
+export DOUBAO_API_RESOURCE_ID=
+export DOUBAO_API_REQUEST_ID=
+export DOUBAO_API_SEQUENCE=
 
 // verify settings
 echo $DOUBAO_API_SEQUENCE
@@ -75,7 +75,7 @@ check the http response header for verifying submmitted task is success, more de
 [source,bash]
 .*4. query results*
 ----
-curl -X POST "https://openspeech.bytedance.com/api/v3/auc/bigmodel/query" \
+curl -s -X POST "https://openspeech.bytedance.com/api/v3/auc/bigmodel/query" \
 -H "Content-Type: application/json" \
 -H "X-Api-App-Key: $DOUBAO_API_APP_KEY" \
 -H "X-Api-Access-Key: $DOUBAO_API_ACCESS_KEY" \
@@ -183,10 +183,16 @@ Use the same methods as submmit task to check the query post is success, the suc
 ----
 
 [source,bash]
-.**
+.*5. Use Python Code*
+----
+$ python3 audio_recognition.py 
+submit task...
+response status_code 200
+query task...
+{'audio_info': {'duration': 5216}, 'result': {'additions': {'duration': '5216'}, 'text': '中共闽宁镇纪律检查委员会。', 'utterances': [{'end_time': 4660, 'start_time': 340, 'text': '中共闽宁镇纪律检查委员会。', 'words': [{'confidence': 0, 'end_time': 580, 'start_time': 340, 'text': '中'}, {'confidence': 0, 'end_time': 780, 'start_time': 580, 'text': '共'}, {'confidence': 0, 'end_time': 1060, 'start_time': 1020, 'text': '闽'}, {'confidence': 0, 'end_time': 1420, 'start_time': 1220, 'text': '宁'}, {'confidence': 0, 'end_time': 1780, 'start_time': 1460, 'text': '镇'}, {'confidence': 0, 'end_time': 2860, 'start_time': 2700, 'text': '纪'}, {'confidence': 0, 'end_time': 3060, 'start_time': 2860, 'text': '律'}, {'confidence': 0, 'end_time': 3620, 'start_time': 3340, 'text': '检'}, {'confidence': 0, 'end_time': 3820, 'start_time': 3620, 'text': '查'}, {'confidence': 0, 'end_time': 4260, 'start_time': 3980, 'text': '委'}, {'confidence': 0, 'end_time': 4380, 'start_time': 4260, 'text': '员'}, {'confidence': 0, 'end_time': 4660, 'start_time': 4380, 'text': '会'}]}]}}
 ----
 
-----
+=== TODO
 
 [source,bash]
 .**
