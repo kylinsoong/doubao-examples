@@ -1,6 +1,45 @@
 = Doubao LLM
 :toc: manual
 
+== 火山方舟
+
+=== 调用模型服务
+
+*1. Create API Key*
+
+Login to https://www.volcengine.com/product/ark, click *立即体验*, navigate to console, in the left bottom, `API Key 管理` -> `创建 API Key`
+
+[source,bash]
+.*set api key*
+----
+export ARK_API_KEY="<YOUR_API_KEY>"
+----
+
+*2. 在线接入点*
+
+`方舟控制台` -> `在线推理` -> `创建推理接入点`
+
+[source,bash]
+.*set api key*
+----
+export ARK_API_ENGPOINT_ID="<YOUR_API_ENGPOINT_ID>"
+----
+
+[source,bash]
+.*3. Install SDK*
+----
+pip3 install --upgrade 'volcengine-python-sdk[ark]'
+----
+
+[source,bash]
+.*4. Remote Call Doubao*
+----
+$ python3 ark_helloworld.py 
+ChatCompletionMessage(content='你好呀！有什么想聊的事儿或者需要帮忙的地方都可以和我说说~', role='assistant', function_call=None, tool_calls=None, audio=None)
+----
+
+
+
 == Speech
 
 === 录音文件识别
