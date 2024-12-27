@@ -150,6 +150,398 @@ Choice(finish_reason='tool_calls', index=0, logprobs=None, message=ChatCompletio
 
 link:ark_text_process_func_call.py[ark_text_process_func_call.py]
 
+== Computer Vision
+
+=== Image Analysis
+
+[cols="2,5a"]
+.*Usage Case*
+|===
+|Name |Usage Case
+
+|复杂图片分析
+|
+
+[source,bash]
+.*Prompt*
+----
+对美国人来说，最便捷的支付APP是什么？最安全的支付APP是什么？手机钱包绑定的借记卡或信用卡有谁？最受欢迎手机钱包APP是什么？移动支付未来趋势？
+----
+
+image:img/us-online-payment.png[Image,300,1500]
+
+* link:ark_vision_image_analysis.py[ark_vision_image_analysis.py]
+
+[source,bash]
+.*Response*
+----
+这张信息图展示了美国移动支付应用的相关数据，以下是根据图中信息的总结：
+
+### 最便捷的支付APP
+- **PayPal**：91%的用户认为PayPal是最便捷的支付应用。
+- **Apple Pay**：86%的用户认为Apple Pay是便捷的支付应用。
+
+### 最安全的支付APP
+- **PayPal**：74%的用户认为PayPal是最安全的支付应用。
+- **Apple Pay**：40%的用户认为Apple Pay是安全的支付应用。
+- **Google Wallet**：35%的用户认为Google Wallet是安全的支付应用。
+
+### 手机钱包绑定的借记卡或信用卡
+- **Chase**：37%的用户将Chase卡绑定到手机钱包。
+- **Bank of America**：35%的用户将Bank of America卡绑定到手机钱包。
+- **American Express**：23%的用户将American Express卡绑定到手机钱包。
+
+### 最受欢迎的手机钱包APP
+- **Apple Pay**：40%的用户使用Apple Pay在结账时支付。
+- **PayPal（店内）**：37%的用户使用PayPal在店内结账时支付。
+- **Starbucks app**：24%的用户使用Starbucks应用支付。
+- **Android Pay**：14%的用户使用Android Pay支付。
+
+### 移动支付未来趋势
+- **NFC支付**：预计在未来3年内，美国的NFC支付将翻倍，到2020年达到1900亿美元。
+- **移动支付价值增长**：从2013年到2018年，美国移动对等支付的价值增长了1620%，预计到2019年将达到860亿美元。
+
+### 用户体验
+- 88%的用户对在零售地点使用手机钱包支付的体验评价为优秀或良好。
+
+这些数据反映了美国消费者对移动支付应用的偏好和使用习惯，显示了移动支付市场的增长潜力和未来趋势。
+----
+
+|多图片分析
+|
+
+[source,bash]
+.*Prompt*
+----
+买篮子中的水果要花多少钱
+----
+
+image:img/fruits-basket.png[Image, width=400, height=251]
+
+image:img/fruits-price-list.png[Image, width=400, height=314]
+
+* link:ark_vision_images_analysis.py[ark_vision_images_analysis.py]
+
+[source,bash]
+.*Response*
+----
+图中的篮子里有香蕉和苹果。根据提供的价格表：
+
+- 苹果（Apples）每个\(1.50\)美元
+- 香蕉（Bananas）每个\(0.80\)美元
+
+由于图片中可以看到至少有2根香蕉和2个苹果，计算如下：
+
+- 2根香蕉的价格：\(2 \times 0.80 = 1.60\)美元
+- 2个苹果的价格：\(2 \times 1.50 = 3.00\)美元
+
+总共需要花费：\(1.60+3.00=4.60\)美元
+
+因此，买篮子中的水果需要花\(4.60\)美元。
+----
+
+|本地图片分析
+|
+
+[source,bash]
+.*Prompt*
+----
+图片传递的情绪是什么?
+----
+
+image:make_things_happen.jpg[Image, width=400, height=400]
+
+* link:ark_vision_image_analysis_encording.py[ark_vision_image_analysis_encording.py]
+
+[source,bash]
+.*Response*
+----
+这张图片传递出一种积极、激励和充满活力的情绪。图中的文字“make things happen”（让事情发生）是一句富有行动力和鼓励性的话语，激励人们积极主动地去实现目标和创造变化。背景中的明亮黄色圆形以及周围点缀的彩色几何图形，进一步增强了这种积极向上的氛围，给人一种充满希望和动力的感觉，仿佛在鼓励观者勇敢地去追求自己的梦想并付诸行动。整体设计简洁有力，视觉效果鲜明，能够有效地激发人们的热情和行动力。
+----
+
+|图片深度分析
+|
+
+[source,bash]
+.*Prompt*
+----
+将图片内容转化为一个说明书
+----
+
+image:img/vevm-bolling-methods.png[Image, width=500, height=500]
+
+[source,bash]
+.*Response*
+----
+以下是根据图中内容生成的一份说明书：
+
+### 云服务架构及功能说明
+
+#### 一、总体架构概述
+本云服务架构主要围绕地域和可用区、VPC（虚拟私有云）以及相关的配套功能模块展开，提供了丰富且灵活的云服务解决方案。通过多种接口和工具，用户可以方便地进行资源管理和运维操作。
+
+#### 二、主要功能模块
+
+1. **接入方式**
+   - **控制台**：提供直观的图形化界面，方便用户进行云资源的管理和操作。
+   - **API/SDK/CLI**：支持通过编程接口、软件开发工具包和命令行工具进行自动化管理和集成。
+   - **Terraform**：支持使用Terraform工具进行基础设施即代码的管理和部署。
+   - **Pulumi**：支持通过Pulumi工具进行云资源的管理和部署。
+
+2. **实例计费方式**
+   - **实例计费**：提供多种灵活的计费方式，包括按量计费、包年包月等，满足不同用户的需求。
+   - **抢占式实例**：支持抢占式实例，用户可以以较低的价格使用闲置资源。
+   - **弹性预约实例**：允许用户提前预约资源，实现弹性扩展。
+   - **预留实例券**：提供预留实例券，方便用户进行长期资源规划和成本控制。
+
+3. **核心组件**
+   - **地域和可用区**：云服务分布在不同的地域和可用区，确保资源的高可用性和容错性。
+   - **VPC（虚拟私有云）**
+     - **子网IP**：支持子网内的通信，确保数据传输的安全性和稳定性。
+     - **公网IP**：提供公网访问能力，支持公网通信。
+     - **网卡**：实现网络连接和数据传输。
+     - **安全隔离和安全组**：确保资源之间的安全隔离和访问控制。
+     - **实例**：提供计算资源，支持各种应用的运行。
+     - **数据存储**
+       - **云盘**：提供持久化存储，支持数据的可靠存储和访问。
+       - **镜像**：支持创建和使用镜像，方便快速部署和扩展。
+       - **密钥对**：提供安全的身份验证和访问控制。
+
+4. **监控和运维**
+   - **指标监控**：实时监控云资源的各项性能指标，如CPU、内存、网络等。
+   - **事件监控**：及时发现和处理云资源的各类事件，确保系统的稳定运行。
+   - **批量作业**：支持批量操作，提高运维效率。
+   - **流程编排**：支持通过流程编排实现复杂的运维任务自动化。
+   - **实例诊断**：提供实例的诊断功能，帮助用户快速定位和解决问题。
+
+5. **智能部署**
+   - **部署集**：支持创建和管理部署集，确保应用的高可用性和容错性。
+   - **专有宿主机**：提供专有宿主机，满足特定的安全和合规需求。
+   - **弹性伸缩**：根据业务需求自动进行资源的弹性伸缩，确保应用的稳定性和成本效益。
+   - **实例启动模版**：支持创建和使用实例启动模版，方便快速部署和扩展。
+
+#### 三、使用场景
+本云服务架构适用于各种规模和行业的企业，包括但不限于：
+- **互联网应用开发**：支持快速部署和扩展Web应用、移动应用等。
+- **企业级应用**：满足企业内部应用的高可用性、安全性和合规性需求。
+- **大数据和AI应用**：提供强大的计算和存储资源，支持大数据处理和人工智能模型训练。
+
+通过上述丰富的功能和灵活的架构，本云服务能够帮助用户快速构建和管理云资源，实现业务的高效运行和持续创新。
+
+以上说明书可以根据实际需求进行进一步细化和完善，以满足不同用户的理解和使用需求。
+----
+
+|器械界面分析
+|
+
+[source,bash]
+.*Prompt*
+----
+用 4 钟语言（中文、英文、韩文、日文）提供设定时间为 5:50 的操作步骤
+----
+
+image:img/medical-device-screen.jepg[Image, width=600, height=198]
+
+* link:ark_vision_image_analysis_medical.py[ark_vision_image_analysis_medical.py]
+
+[source,bash]
+.*Response*
+----
+以下是使用图中烤箱将时间设置为5:50的操作步骤：
+
+### 中文
+1. 按下“TIME CONTROLS”区域中的“CLOCK”按钮。
+2. 使用数字键盘输入“5”、“5”、“0”。
+3. 按下“START”按钮确认时间设置。
+
+### 英文
+1. Press the "CLOCK" button in the "TIME CONTROLS" section.
+2. Use the numeric keypad to enter "5", "5", "0".
+3. Press the "START" button to confirm the time setting.
+
+### 韩文
+1. "TIME CONTROLS" 영역의 "CLOCK" 버튼을 누릅니다.
+2. 숫자 키패드를 사용하여 "5", "5", "0"을 입력합니다.
+3. "START" 버튼을 눌러 시간 설정을 확인합니다.
+
+### 日文
+1. 「TIME CONTROLS」エリアの「CLOCK」ボタンを押します。
+2. 数字キーパッドを使って「5」、「5」、「0」を入力します。
+3. 「START」ボタンを押して、時間設定を確定します。
+
+这样，烤箱的时间就会被设置为5:50。
+----
+
+|ER 图分析
+|
+
+[source,bash]
+.*Prompt*
+----
+详细描述各对象之间的关系，并生成插入1条商品数据的SQL
+----
+
+image:img/category-ER.png[Image, width=500, height=340]
+
+* link:ark_vision_image_analysis_er.py[ark_vision_image_analysis_er.py]
+
+[source,bash]
+.*Response*
+----
+这张图展示了一个数据库的实体关系模型（ER模型），包含了几个实体以及它们之间的关系。以下是各对象之间的关系描述：
+
+### 实体和关系描述
+1. **Category（类别）**
+   - **属性**：`category`（类别ID，主键），`category_name`（类别名称）
+   - **关系**：与`Sales`实体有一对多关系，一个类别可以有多个销售记录。
+
+2. **Vendor（供应商）**
+   - **属性**：`vendor_no`（供应商编号，主键），`vendor`（供应商名称）
+   - **关系**：与`Sales`实体有一对多关系，一个供应商可以有多个销售记录。
+
+3. **Item（商品）**
+   - **属性**：`item`（商品ID，主键），`description`（描述），`pack`（包装），`liter_size`（容量）
+   - **关系**：与`Sales`实体有一对多关系，一个商品可以有多个销售记录。
+
+4. **Sales（销售）**
+   - **属性**：`date`（销售日期），`store`（商店ID），`category`（类别ID），`vendor_no`（供应商编号），`item`（商品ID），`state_bottle_cost`（州瓶成本），`bottle_price`（瓶价格），`bottle_qty`（瓶数量），`total`（总金额）
+   - **关系**：与`Category`、`Vendor`、`Item`、`Convenience_store`有多个一对多关系。
+
+5. **Convenience_store（便利店）**
+   - **属性**：`store`（商店ID，主键）
+   - **关系**：与`Sales`实体有一对多关系，一个便利店可以有多个销售记录。
+
+6. **Store（商店）**
+   - **属性**：`store`（商店ID，主键），`name`（商店名称），`address`（地址），`city`（城市），`zipcode`（邮政编码），`store_location`（商店位置），`county_number`（县编号）
+   - **关系**：与`County`实体有多对一关系，一个商店属于一个县。
+
+7. **County（县）**
+   - **属性**：`county_number`（县编号，主键），`county`（县名称）
+   - **关系**：与`Store`实体有一对多关系，一个县可以有多个商店。
+
+### 插入一条商品数据的SQL语句
+以下是插入一条商品数据到`Item`表的SQL语句：
+
+```sql
+INSERT INTO Item (item, description, pack, liter_size)
+VALUES ('I001', '商品描述', '包装信息', 1.5);
+```
+
+在这个SQL语句中：
+- `I001`是商品ID。
+- `商品描述`是商品的描述信息。
+- `包装信息`是商品的包装信息。
+- `1.5`是商品的容量（升）。
+
+请根据实际需求调整这些值。
+
+这个ER模型展示了一个典型的销售数据管理系统的数据库结构，其中包含了商品、供应商、类别、销售记录、便利店、商店和县等实体及其之间的关系。
+----
+
+|眼镜推荐
+|
+
+[source,bash]
+.*Prompt*
+----
+我脸型是椭圆形的，帮我推荐一副眼镜，并说明原因
+----
+
+image:img/glass-1.jpeg[Image, width=400, height=300]
+image:img/glass-2.jpeg[Image, width=400, height=300]
+
+* link:ark_vision_images_analysis_glasses.py[ark_vision_images_analysis_glasses.py]
+
+[source,bash]
+.*Response*
+----
+以下是根据椭圆形脸型为你推荐的眼镜及原因：
+
+### 推荐款式及原因
+- **推荐款式**
+    - **图2中的圆形眼镜**
+- **原因**
+    - **修饰脸型**
+        - 椭圆形脸的特点是脸部线条较为柔和圆润，没有明显的棱角。圆形眼镜能够与脸部的柔和线条相呼应，避免了与脸部轮廓产生冲突，从而营造出一种和谐、自然的美感。
+    - **平衡比例**
+        - 圆形眼镜可以在视觉上增加脸部的宽度，使脸部看起来更加均衡。对于椭圆形脸来说，这有助于避免脸部因过长或过窄而显得不协调，起到了很好的平衡作用。
+    - **时尚百搭**
+        - 这种款式的眼镜具有复古又时尚的感觉，无论是在日常生活还是正式场合，都能轻松搭配各种服饰，展现出不同的风格，从休闲到优雅都能轻松驾驭。
+
+综上所述，图2中的圆形眼镜很适合椭圆形脸型，能够在修饰脸型的同时展现出佩戴者的时尚品味。
+----
+
+|图片比对
+|
+
+[source,bash]
+.*Prompt*
+----
+图 1 显示的是什么？在什么地方？两幅图有什么相似处，两幅图有什么不同？
+----
+
+image:img/Feldherrnhalle-1.jpeg[Image, width=600, height=400]
+
+image:img/Feldherrnhalle-2.jpeg[Image, width=600, height=400]
+
+* link:ark_vision_images_analysis_difference.py[ark_vision_images_analysis_difference.py]
+
+[source,bash]
+.*Response*
+----
+图1显示的是一个欧洲风格的城市广场，广场上有一些行人和具有历史感的建筑。这些建筑具有典型的欧洲古典风格，可能是德国慕尼黑的圣母广场（Odeonsplatz），因其建筑风格和广场布局与慕尼黑的圣母广场相符。
+
+### 相似处：
+1. **建筑和广场布局**：两幅图展示的都是相同的城市广场，建筑和广场的布局完全一致。
+2. **天气和时间**：两幅图中的天气看起来都是阴天，且光线条件相似，可能拍摄于同一天的相近时间。
+3. **人物活动**：两幅图中都有许多行人在广场上活动，人物的分布和行为也较为相似。
+
+### 不同处：
+1. **拍摄角度**：图1的拍摄角度略高于图2，图2的视角更接近平视角度。
+2. **人物位置**：虽然整体人物活动相似，但具体人物的位置在两幅图中有所不同，部分人物在图1和图2中的位置发生了变化。
+3. **细节捕捉**：由于拍摄角度和时间的细微差异，两幅图在细节上可能存在一些不同，例如人物的姿态和动作等。
+
+总的来说，这两幅图展示了同一个欧洲城市广场的不同拍摄瞬间，主要的相似之处在于场景和整体氛围，而不同之处则体现在拍摄角度和具体人物位置等细节上。
+----
+
+|数学题目
+|
+
+[source,bash]
+.*Prompt*
+----
+求解题目
+----
+
+image:img/math-questions.jpg[Image, width=300, height=100]
+
+* link:ark_vision_image_analysis_math.py[ark_vision_image_analysis_math.py]
+
+[source,bash]
+.*Response*
+----
+本题可根据极坐标方程的相关知识求解。
+
+### （1）求\(M_1\)，\(M_2\)，\(M_3\)的极坐标方程：
+- **步骤一：分析\(M_1\)的极坐标方程**
+已知弧\(AB\)所在圆的圆心为\((1,0)\)，半径\(r = 1\)，根据圆的极坐标方程\(\rho = 2r\cos(\theta-\alpha)\)（其中\((r,\alpha)\)为圆心的极坐标），可得\(M_1\)的极坐标方程为\(\rho = 2\cos\theta\)，\(\theta\in[0,\frac{\pi}{4}]\)。
+- **步骤二：分析\(M_2\)的极坐标方程**
+弧\(BC\)所在圆的圆心为\((1,\frac{\pi}{2})\)，半径\(r = 1\)，根据圆的极坐标方程\(\rho = 2r\sin(\theta-\alpha)\)（其中\((r,\alpha)\)为圆心的极坐标），可得\(M_2\)的极坐标方程为\(\rho = 2\sin\theta\)，\(\theta\in[\frac{\pi}{4},\frac{3\pi}{4}]\)。
+- **步骤三：分析\(M_3\)的极坐标方程**
+弧\(CD\)所在圆的圆心为\((1,\pi)\)，半径\(r = 1\)，根据圆的极坐标方程\(\rho=-2\cos\theta\)（其中\((r,\alpha)\)为圆心的极坐标），可得\(M_3\)的极坐标方程为\(\rho=-2\cos\theta\)，\(\theta\in[\frac{3\pi}{4},\pi]\)。
+
+### （2）求\(P\)的极坐标：
+- **步骤一：设点\(P\)的极坐标为\((\rho,\theta)\)并分情况讨论**
+因为曲线\(M\)由\(M_1\)，\(M_2\)，\(M_3\)构成，且\(\vert OP\vert=\sqrt{3}\)，所以需要分三种情况讨论：
+  - 当\(P\)在\(M_1\)上时，由\(\rho = 2\cos\theta\)且\(\rho=\sqrt{3}\)，可得\(2\cos\theta=\sqrt{3}\)，解得\(\cos\theta=\frac{\sqrt{3}}{2}\)，又因为\(\theta\in[0,\frac{\pi}{4}]\)，所以\(\theta=\frac{\pi}{6}\)，此时\(P\)的极坐标为\((\sqrt{3},\frac{\pi}{6})\)。
+  - 当\(P\)在\(M_2\)上时，由\(\rho = 2\sin\theta\)且\(\rho=\sqrt{3}\)，可得\(2\sin\theta=\sqrt{3}\)，解得\(\sin\theta=\frac{\sqrt{3}}{2}\)，又因为\(\theta\in[\frac{\pi}{4},\frac{3\pi}{4}]\)，所以\(\theta=\frac{\pi}{3}\)或\(\theta=\frac{2\pi}{3}\)，此时\(P\)的极坐标为\((\sqrt{3},\frac{\pi}{3})\)或\((\sqrt{3},\frac{2\pi}{3})\)。
+  - 当\(P\)在\(M_3\)上时，由\(\rho=-2\cos\theta\)且\(\rho=\sqrt{3}\)，可得\(-2\cos\theta=\sqrt{3}\)，解得\(\cos\theta=-\frac{\sqrt{3}}{2}\)，又因为\(\theta\in[\frac{3\pi}{4},\pi]\)，所以\(\theta=\frac{5\pi}{6}\)，此时\(P\)的极坐标为\((\sqrt{3},\frac{5\pi}{6})\)。
+
+综上，\(P\)的极坐标为\((\sqrt{3},\frac{\pi}{6})\)或\((\sqrt{3},\frac{\pi}{3})\)或\((\sqrt{3},\frac{2\pi}{3})\)或\((\sqrt{3},\frac{5\pi}{6})\)。
+----
+
+|===
+
 == Speech
 
 === 录音文件识别
