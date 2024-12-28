@@ -155,7 +155,6 @@ link:ark_text_process_func_call.py[ark_text_process_func_call.py]
 === Image Analysis
 
 [cols="2,5a"]
-.*Usage Case*
 |===
 |Name |Usage Case
 
@@ -269,6 +268,8 @@ image:make_things_happen.jpg[Image, width=400, height=400]
 ----
 
 image:img/vevm-bolling-methods.png[Image, width=500, height=500]
+
+* link:ark_vision_image_analysis_high.py[ark_vision_image_analysis_high.py]
 
 [source,bash]
 .*Response*
@@ -513,7 +514,7 @@ image:img/Feldherrnhalle-2.jpeg[Image, width=600, height=400]
 求解题目
 ----
 
-image:img/math-questions.jpg[Image, width=300, height=100]
+image:img/math-questions.jpg[Image, width=500, height=100]
 
 * link:ark_vision_image_analysis_math.py[ark_vision_image_analysis_math.py]
 
@@ -539,6 +540,20 @@ image:img/math-questions.jpg[Image, width=300, height=100]
 
 综上，\(P\)的极坐标为\((\sqrt{3},\frac{\pi}{6})\)或\((\sqrt{3},\frac{\pi}{3})\)或\((\sqrt{3},\frac{2\pi}{3})\)或\((\sqrt{3},\frac{5\pi}{6})\)。
 ----
+
+|===
+
+=== Vedio Analysis
+
+[cols="2,5a"]
+|===
+|Name |Usage Case
+
+|
+|
+
+|
+|
 
 |===
 
